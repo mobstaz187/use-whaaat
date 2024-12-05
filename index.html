@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+   <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E2GZFW7H72"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E2GZFW7H72');
+</script>
+    <title>useless</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon-watashi.png" type="image/x-icon">
+<link rel="manifest" href="/useless/manifest.json">
+    <meta property="og:title" content="useless">
+<meta property="og:description" content="a webpage that is basically useless.">
+<meta property="og:image" content="https://haradesu.github.io/useless/thumbnail-sharing.png">
+<meta property="og:url" content="https://haradesu.github.io/useless/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:type" content="website">
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('shareLink').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the link from navigating to a new page
+
+        if (navigator.share) {
+          navigator.share({
+            title: 'a webpage, that is basically, useless.',
+            url: 'https://theuselessweb.com/'
+          })
+          .then(() => console.log('Successfully shared'))
+          .catch((error) => console.log('Error sharing:', error));
+        } else {
+          console.log('Web Share API not supported');
+        }
+      });
+    });
+  </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap');
+      .link-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+    z-index: 9999;
+    display: flex; /* Use flexbox to align items horizontally */
+    align-items: center; /* Align items vertically */
+  }
+
+  .link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .separator {
+    margin: 0 5px;
+  }
+      /* CSS for desktop screens */
+    body {
+      font-size: 16px;
+    }
+
+    /* CSS for mobile screens */
+    @media only screen and (max-width: 600px) {
+      body {
+        font-size: 14px;
+      }
+    }
+      /* Default styles for light mode */
+      body {
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .switch-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      /* Styles for dark mode */
+      body.dark-mode {
+        background-color: #333;
+        color: #f5f5f5;
+      }
+
+      /* Styles for the switch */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 120px;
+        height: 68px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc; /* default gray color */
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 52px;
+        width: 52px;
+        left: 8px;
+        bottom: 8px;
+        background-color: #fff; /* default white color */
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #666; /* dark gray color */
+      }
+
+      input:focus + .slider {
+        box-shadow: 0 0 1px #666;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(52px);
+        -ms-transform: translateX(52px);
+        transform: translateX(52px);
+      }
+
+      /* Styles for the pop-up text */
+      .popup-text {
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 16px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .fade-in {
+        opacity: 1;
+      }
+
+      /* Styles for the footer text */
+      .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        color: #333;
+        background-color: #f5f5f5;
+        transition: color 0.5s ease;
+      }
+
+      body.dark-mode .footer {
+        color: #f5f5f5;
+        background-color: #333;
+      }
+      html, body {
+  height: 100%;
+  overflow: hidden;
+  
+}
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 600px;
+    z-index: 10;
+    position:fixed;
+}
+    </style>
+    <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/useless/service-worker.js')
+          .then(function(registration) {
+            console.log('Service Worker registered with scope:', registration.scope);
+          })
+          .catch(function(error) {
+            console.log('Service Worker registration failed:', error);
+          });
+      });
+    }
+  </script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        var switchElement = document.querySelector('.switch input');
+        var popupText = document.querySelector('.popup-text');
+        var footerText = document.querySelector('.footer');
+        var switchTimeout;
+        var popupTimeout;
+        var isSwitchDisabled = false;
+
+        // Set switch to default "on" state
+        switchElement.checked = true;
+
+        // Helper function to get the browser language
+       
+        function getBrowserLanguage() {
+return (
+navigator.language || navigator.userLanguage || navigator.browserLanguage
+).toLowerCase();
+}    // Texts based on different languages
+    var texts = {
+      en: [
+        "No, I am still reading!",
+        "Wait! I'm not done yet!",
+        "Please don't turn off the light!",
+        "Leave the light on!",
+        "I need the light!",
+        "Keep it lit, please!",
+        "Light, not darkness, please!",
+        "I'm not ready for darkness!",
+        "Keep the light shining!",
+      ],
+      id: [
+        "Woy, jangan dimatiin lampunya ini masih baca!",
+        "Tunggu dulu! Belum selesai!",
+        "Tolong jangan matikan lampunya!",
+        "Biarkan lampunya menyala!",
+        "Aku butuh cahaya!",
+        "Biarkan terang menyala!",
+        "Jangan dalam kegelapan!",
+      ],
+      ja: [
+        "まだ読んでいます！",
+        "待って！まだ終わっていません！",
+        "ライトを消さないでください！",
+        "ライトをつけておいてください！",
+        "光が必要です！",
+        "明るさを保ってください！",
+        "今は暗さに対応できません！",
+        "明かりをつけておいてください！",
+        "暗闇は嫌です！",
+      ],
+    };
+
+    function getRandomText() {
+      var browserLang = getBrowserLanguage();
+
+      // Check if the browser language is supported, otherwise default to English
+      var textArray = texts[browserLang] || texts.en;
+      var randomIndex = Math.floor(Math.random() * textArray.length);
+      return textArray[randomIndex];
+    }
+
+    switchElement.addEventListener('change', function() {
+      var isDarkMode = !switchElement.checked;
+
+      if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        showPopupTextInstant();
+        disableSwitch();
+      } else {
+        document.body.classList.remove('dark-mode');
+        hidePopupText();
+        enableSwitch();
+      }
+    });
+
+    function showPopupText() {
+      popupText.textContent = getRandomText();
+      popupText.classList.add('fade-in');
+      switchTimeout = setTimeout(toggleSwitch, 3000);
+    }
+
+    function showPopupTextInstant() {
+      popupText.textContent = getRandomText();
+      popupText.classList.add('fade-in');
+      switchTimeout = setTimeout(toggleSwitch, 2000);
+    }
+
+    function hidePopupText() {
+      popupText.classList.remove('fade-in');
+    }
+
+    function toggleSwitch() {
+      switchElement.checked = !switchElement.checked;
+      if (switchElement.checked) {
+        document.body.classList.remove('dark-mode');
+        hidePopupText();
+        enableSwitch();
+      } else {
+        document.body.classList.add('dark-mode');
+        popupTimeout = setTimeout(showPopupText, 2000);
+        disableSwitch();
+      }
+    }
+
+    function disableSwitch() {
+      isSwitchDisabled = true;
+      switchElement.disabled = true;
+      setTimeout(function() {
+        isSwitchDisabled = false;
+      }, 3000);
+    }
+
+    function enableSwitch() {
+      switchElement.disabled = false;
+    }
+
+    switchElement.addEventListener('click', function(e) {
+      if (isSwitchDisabled) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+  });
+
+  function copy(that){
+var inp =document.createElement('input');
+document.body.appendChild(inp)
+inp.value =that.textContent
+inp.select();
+document.execCommand('copy',false);
+inp.remove();
+}
+
+var links = [
+    "www.ismycomputeron.com/",
+    "hooooooooo.com/",
+    "hackertyper.com",
+    "puginarug.com",
+    "fuckyeahbutton.org/",
+    "trypap.com/",
+    "findtheinvisiblecow.com/",
+    "findtheinvisiblecow.com/",
+    "www.patience-is-a-virtue.org/"];
+
+openStuff = function () {
+    // get a random number between 0 and the number of links
+    var randIdx = Math.random() * links.length;
+    // round it, so it can be used as array index
+    randIdx = parseInt(randIdx, 10);
+    // construct the link to be opened
+    var link = 'http://' + links[randIdx];
+    // open it in a new window
+    window.open(link);
+};
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+</head>
+
+  <body>
+    <script>window.PICKAXE=window.PICKAXE||{pickaxes:[],style:"kHsjoCQGgI0GWASmgIdIA2CHA0wGQyCwBQBUiEBzQQC+EgGQwgMA3gLICDMAoAnQgvFSCsUIPQYgIHqAEw4NXUgIz6DFQ4OkwghP2AGnoMFJgKAFA8gEA4QAI9gVPBABGqBU3gAggTUBAUQ6ApYkAAgIFMxwLcKgRvlAhyyAIG8DFAoAF1QOTugMODACreB2osAqaIBABQAAGgaINAr0OASwUCiIQGBARk6AUOiAo9GAq6qAZUKAAkOAhKAAoIBDz4AAB4CkT4AR8YCSIYBygIASwoDgAoCTBoCTQIDT04B01oBj1IBDAYD1o4BWNYD2rIAztoCXQoCAl4BTgYA3xIBzw4CysoB4h4B20YBY84BqooB0l4AFGYAZ9YBCGIC2GoDRJ4A42oC0N4AEG4CEiIBA2YBAxIA0wYAMt4BOIIDECIAFS4ACJIALYICXQIAXh4AMX4Ab+IBgR4AeAYAmBYCpWoDhQAAZABTADIFgABgQCyQIABZEAAAyACZRAMpdgFRAABAgAPXwAZgIBuokAdEiAKLDACEogESiQAqEoBqL0Ax4iAJBHACWRgADmwDpsIAAm0Ak8WAB4zAGIjgBzQwDjIYBOI0APSGAGkZAAh5AGbACBKgAYDQCBxIBKLMARaKAG1JAH45gCUyQBpwIAop8A1N2ATLpAMXQgGECQDzAoAQ9UABFOAKIvAIKZgAwTAAQgEBdQCADIBviMAc76AGWnAFvQgGCgwAXBIB9CUA9fqAETBAKaNgAU/QB27IA67MAsRiAGW9AAwkgGBUQAMi4BmQEAAGaAABxAECIgFllwA5jIBehUAlFyACZXAAwEgAJswCHGoAeCUAps+ANlbAJTfgFaSQAMXoBGF0AmYyADkVAEIygHg2QCCQIAq1UAyBWAJ7tAOJIgAHhQBBIIA6QkAFgOAbCZADnwgEZiwDQv0RADsZgGXAwDzmYAcIUALdeAAqDAAA1gCprQBZpIBQ/cAI5+AZ7nAI6pgDmiQBbqIALBUAQArAHPcQBfqkAM2PAA75wAvikAKQJABG6wAahkAMGLAGXJwBRm0AAAQgA"},window.PICKAXE.pickaxes.push({id:"The_Useless_Bot_42FZW",type:"input-box"});const{id:_fid}=window.PICKAXE.pickaxes[0];fetch(`https://embed.pickaxeproject.com/axe/api/script/${_fid}`).then((e=>e.json())).then((({v:e})=>{const t=`https://cdn.jsdelivr.net/gh/pickaxeproject/cdn@${e}/dist`;if(!document.querySelector(`script[src="${t}/bundle.js"]`)){const e=document.createElement("script");e.src=t+"/bundle.js",e.defer=!0,document.head.appendChild(e)}}));</script>
+<div class="content" id="pickaxe-input-box-The_Useless_Bot_42FZW"></div>
+    <div class="switch-container">
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div><div class="popup-text">
+      No, I am still reading!
+    </div>
+    
+<div class="link-container">
+  <a class="link" href="https://pump.fun" target="_blank">PumpFun(Updating)</a>
+  <span class="separator">|</span>
+  <a class="link" href="https://x.com/uselessandless" target="_blank">
+    X
+  </a>
+  <span class="separator">|</span>
+  <span class="link">CA(Click to Copy):</span>
+  <a class="link" onclick="copy(this)">Updating...</a>
+  <span class="separator">|</span>
+  <a class="link" href="#" target="_blank" rel="noopener noreferrer" onclick="openStuff();" >Open a Useless Random Website</a>
+  
+</div>
+  </body>
+  </html>    

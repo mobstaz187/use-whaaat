@@ -1,0 +1,21 @@
+{
+  "name": "useless",
+  "short_name": "useless",
+  "description": "a webpage, that is basically, useless.",
+  "icons": [
+    {
+      "src": "appicon-watashi-neue.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "appicon-watashi-neue.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/useless/",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#333"
+}
